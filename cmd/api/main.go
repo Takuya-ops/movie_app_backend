@@ -18,9 +18,12 @@ func main() {
 
 	app.Domain = "example.com"
 
-	log.Printf("ポート番号：%dでアプリケーションを起動", port)
+	log.Printf("http://localhost:%d でアプリケーションを起動", port)
 
-	err := http.ListenAndServe(fmt.Sprintf(":%d", port), nil)
+	http.HandleFunc("/", app.Home)
+	// http.HandleFunc("/sample", Sample)
+
+	err := http.ListenAndServe(fmt.Sprintf(":%d", port), app.routes())
 	if err != nil {
 		log.Fatal(err)
 	}
