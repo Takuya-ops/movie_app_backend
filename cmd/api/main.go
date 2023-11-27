@@ -31,8 +31,6 @@ func main() {
 	app.DB = &dbrepo.PostgresDBRepo{DB: conn}
 	defer app.DB.Connection().Close()
 
-	app.Domain = "example.com"
-
 	log.Printf("http://localhost:%d でアプリケーションを起動", port)
 
 	http.HandleFunc("/", app.Home)
